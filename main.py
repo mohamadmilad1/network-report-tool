@@ -6,18 +6,18 @@ def ping_device(ip):
     return response == 0
 
 def scan_network():
-    network_prefix = "192.168.1."
     devices = []
 
     print("Scanning network...")
-    for i in range(1, 255):
-        ip = network_prefix + str(i)
-        if ping_device(ip):
-            print(f"{ip} is online")
-            devices.append({"IP Address": ip, "Status": "Online"})
-        else:
-            print(f"{ip} is offline")
-            devices.append({"IP Address": ip, "Status": "Offline"})
+    for i in range(48, 52):  # Range of 48 to 51
+        for j in range(0, 256):  # Range of 0 to 255
+            ip = f"192.168.{i}.{j}"
+            if ping_device(ip):
+                print(f"{ip} is online")
+                devices.append({"IP Address": ip, "Status": "Online"})
+            else:
+                print(f"{ip} is offline")
+                devices.append({"IP Address": ip, "Status": "Offline"})
     
     return devices
 
